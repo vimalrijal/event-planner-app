@@ -1,11 +1,13 @@
-import React,{useState, useRef} from 'react'
-import { Link, useNavigate, Route, Routes } from 'react-router-dom';
+import React,{useState, useRef,useContext} from 'react'
+import { Link, useNavigate, Route, Routes, createSearchParams } from 'react-router-dom';
+import { Store } from '../App';
 
 import Event from './Event';
 
 const Create = () => {
 
     const navigate = useNavigate()
+    const user = useContext(Store);
 
     const eventRef = useRef(null);
     const hostRef = useRef(null);
@@ -13,27 +15,16 @@ const Create = () => {
     const startDateRef = useRef(null);
     const endDateRef = useRef(null);
 
-    const [data, setData] = useState({
-        eventName: null,
-        hostName: null,
-        locationRef:null,
-        startDate: null,
-        endDate: null
-    })
-
-    
-
-
     const validateData = () => {
-        
             
-            setData({
+            user.setdata({
                 eventName: eventRef.current.value,
                 hostName: hostRef.current.value,
-                locationRef: locationRef.current.value,
+                location: locationRef.current.value,
                 startDate: startDateRef.current.value,
                 endDate: endDateRef.current.value
             })
+
             navigate('/event')
     }
 
